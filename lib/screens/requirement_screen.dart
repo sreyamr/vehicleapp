@@ -14,6 +14,9 @@ class RequirementScreen extends StatelessWidget {
       getRequirementProvider.getRequirement();
     });
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Requirement List"),
+      ),
       body: Consumer<GetRequirementProvider>(
         builder: (context, totalVehicleProvider, child) {
           return RefreshIndicator(
@@ -33,31 +36,36 @@ class RequirementScreen extends StatelessWidget {
                   ),
                   elevation: 1,
                   color: Colors.white,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding:  EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                           Text(vehicle.fkVehicleVariantId.toString()),
-                            Row(
-                              children: [
-                                Text("Brand"),
-                                Text(vehicle.brand.name),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Text("Vehicle Model"),
-                                Text(vehicle.vehicleModel.name),
-                              ],
-                            )
-                          ]
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding:  EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                             Text(vehicle.fkVehicleVariantId.toString()),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text("Brand"),
+                                  Text(vehicle.brand.name),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text("Vehicle Model"),
+                                  Text(vehicle.vehicleModel.name),
+                                ],
+                              )
+                            ]
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 );
               },
