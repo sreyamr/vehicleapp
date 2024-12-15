@@ -3,16 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vehicleapp/providers/get_requirement_provider.dart';
 
+import '../config/approutes.dart';
+import '../models/vehicle_model.dart';
+
 class RequirementScreen extends StatelessWidget {
-  const RequirementScreen({super.key});
+   RequirementScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final getRequirementProvider =
-      Provider.of<GetRequirementProvider>(context, listen: false);
-      getRequirementProvider.getRequirement();
-    });
+  late final Vehicle? vehicle;
+   Widget build(BuildContext context) {
+     WidgetsBinding.instance.addPostFrameCallback((_) async {
+       final getRequirementProvider =
+       Provider.of<GetRequirementProvider>(context, listen: false);
+       await getRequirementProvider.getRequirement(); // Wait for data to be fetched
+       vehicle = getRequirementProvider.vehicle.isNotEmpty
+           ? getRequirementProvider.vehicle.first // Assign the first vehicle or handle as needed
+           : null;
+     });
     return Scaffold(
       appBar: AppBar(
         title: Text("Requirement List"),
@@ -72,6 +79,19 @@ class RequirementScreen extends StatelessWidget {
             ),
           );
         },
+      ),
+
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(), // Adds a notch for the FAB
+        child: SizedBox(
+          height: 60,
+         child: ElevatedButton(onPressed: (){
+           Navigator.pushNamed(context, AppRoutes.chooseRequirement,arguments:vehicle );
+         },  style: ElevatedButton.styleFrom(
+           backgroundColor: Colors.brown[900],
+         ),
+             child: const Text("Create Requirement",style: TextStyle(color: Colors.white))),
+        ),
       ),
     );
   }

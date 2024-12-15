@@ -4,4 +4,6 @@ class AppRoutes {
   static const home = 'home';
   static const vehicleDetails = 'vehicleDetails';
   static const requirement = 'requirement';
+  static const chooseRequirement = 'chooseRequirement';
+  static const addRequirement = 'addRequirement';
 }

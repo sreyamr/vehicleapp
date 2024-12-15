@@ -59,37 +59,48 @@ class Vehicle {
 
   factory Vehicle.fromJson(Map<String, dynamic> json) {
     return Vehicle(
-      id: json['id'],
-      uniqueId: json['unique_id'],
-      fkVehicleTypeId: json['fk_vehicle_type_id'],
-      fkFuelTypeId: json['fk_fuel_type_id'],
-      fkBrandId: json['fk_brand_id'],
-      fkVehicleModelId: json['fk_vehicle_model_id'],
-      fkVehicleVariantId: json['fk_vehicle_variant_id'],
-      year: json['year'],
-      price: json['price'],
-      dealPrice: json['deal_price'],
-      isNewArrival: json['is_new_arrival'],
-      isPopular: json['is_popular'],
-      vehicleStatus: json['vehicle_status'],
-      isVerified: json['is_verified'],
-      totalAmount: json['total_amount'],
-      createdAt: json['created_at'],
-      location: json['location'],
-      kmDriven: json['km_driven'],
-      listedDays: json['listed_days'],
-      isBooked: json['is_booked'],
-      bookingId: json['booking_id'],
+      id: json['id'] as int?,
+      uniqueId: json['unique_id'] as String?,
+      fkVehicleTypeId: json['fk_vehicle_type_id'] as int?,
+      fkFuelTypeId: json['fk_fuel_type_id'] as int?,
+      fkBrandId: json['fk_brand_id'] as int?,
+      fkVehicleModelId: json['fk_vehicle_model_id'] as int?,
+      fkVehicleVariantId: json['fk_vehicle_variant_id'] as int?,
+      year: json['year'] as String?,
+      price: json['price'] as String?,
+      dealPrice: json['deal_price'] as String?,
+      isNewArrival: json['is_new_arrival'] as int?,
+      isPopular: json['is_popular'] as int?,
+      vehicleStatus: json['vehicle_status'] as String?,
+      isVerified: json['is_verified'] as String?,
+      totalAmount: json['total_amount'] as String?,
+      createdAt: json['created_at'] as String?,
+      location: json['location'] as String?,
+      kmDriven: json['km_driven'] as String?,
+      listedDays: json['listed_days'] as int?,
+      isBooked: json['is_booked'] as bool?,
+      bookingId: json['booking_id'] as int?,
       images: (json['images'] as List<dynamic>?)
-          ?.map((image) => VehicleImage.fromJson(image))
-          .toList() ?? [],  // Use an empty list if 'images' is null
-      vehicleType: VehicleType.fromJson(json['vehicle_type']),
-      fuelType: FuelType.fromJson(json['fuel_type']),
-      brand: Brand.fromJson(json['brand']),
-      vehicleModel: VehicleModelName.fromJson(json['vehicle_model']),
-      vehicleVariant: VehicleVariant.fromJson(json['vehicle_variant']),
+          ?.map((image) => VehicleImage.fromJson(image as Map<String, dynamic>))
+          .toList() ?? [], // Safely handle null images
+      vehicleType: json['vehicle_type'] != null
+          ? VehicleType.fromJson(json['vehicle_type'] as Map<String, dynamic>)
+          : VehicleType(id: 0, name: ''), // Default if null
+      fuelType: json['fuel_type'] != null
+          ? FuelType.fromJson(json['fuel_type'] as Map<String, dynamic>)
+          : FuelType(id: 0, name: ''), // Default if null
+      brand: json['brand'] != null
+          ? Brand.fromJson(json['brand'] as Map<String, dynamic>)
+          : Brand(id: 0, name: ''), // Default if null
+      vehicleModel: json['vehicle_model'] != null
+          ? VehicleModelName.fromJson(json['vehicle_model'] as Map<String, dynamic>)
+          : VehicleModelName(id: 0, name: ''), // Default if null
+      vehicleVariant: json['vehicle_variant'] != null
+          ? VehicleVariant.fromJson(json['vehicle_variant'] as Map<String, dynamic>)
+          : VehicleVariant(id: 0, name: ''), // Default if null
     );
   }
+
 
 }
 

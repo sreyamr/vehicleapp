@@ -4,4 +4,5 @@ class Urls{
   static const getTotalVehicles = "$baseUrl/vendor/get-total-vehicles";
   static const getVehiclesDetails = "$baseUrl/vendor/get-vehicle-details/";
   static const getRequirement = "$baseUrl/get-vendor-requirements";
+  static const getBrand = "$baseUrl/vendor/get-brand-data/";
 }
