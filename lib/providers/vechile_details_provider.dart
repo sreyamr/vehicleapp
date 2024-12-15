@@ -12,8 +12,8 @@ class GetVehicleDetailsProvider with ChangeNotifier {
   List<Vehicle> get vehicle => _vehicle;
   bool get isLoading => _isLoading;
 
-  Future<void> getVehicleDetails() async {
-    final url = Uri.parse(Urls.getVehiclesDetails);
+  Future<void> getVehicleDetails(Vehicle vehicle) async {
+    final url = Uri.parse("${Urls.getVehiclesDetails}${vehicle.id}");
     print(url);
     String? token = await AppController.getToken();
     print(token);

@@ -11,6 +11,7 @@ import 'package:vehicleapp/screens/splash_screen.dart';
 import 'package:vehicleapp/screens/vechiledetails_screen.dart';
 
 import 'config/approutes.dart';
+import 'models/vehicle_model.dart';
 
 void main() {
   runApp(const MyApp());
@@ -45,7 +46,10 @@ class MyApp extends StatelessWidget {
       AppRoutes.splash:(context)=> const SplashScreen(),
       AppRoutes.login:(context)=>  LoginScreen(),
       AppRoutes.home:(context)=>  const HomeScreen(),
-      AppRoutes.vehicleDetails:(context)=>  const VehicleDetailsScreen(),
+      AppRoutes.vehicleDetails: (context) {
+        final vehicle = ModalRoute.of(context)!.settings.arguments as Vehicle;
+        return VehicleDetailsScreen(vehicle: vehicle);
+      },
       AppRoutes.requirement:(context)=>  const RequirementScreen()
     };
   }

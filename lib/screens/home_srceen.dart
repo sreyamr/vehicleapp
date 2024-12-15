@@ -59,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                 return GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, AppRoutes.vehicleDetails);
+                    Navigator.pushNamed(context, AppRoutes.vehicleDetails,arguments: vehicle);
                   },
                   child: Card(
                     shape: RoundedRectangleBorder(
@@ -127,7 +127,8 @@ class _HomeScreenState extends State<HomeScreen> {
         selectedItemColor: Colors.brown, // Color for the selected item icon and label
         unselectedItemColor: Colors.black, // Color for the unselected item icon and label
         selectedLabelStyle: const TextStyle(color: Colors.brown), // Selected label text color
-        unselectedLabelStyle: const TextStyle(color: Colors.grey),
+        unselectedLabelStyle: const TextStyle(color: Colors.black),
+        showUnselectedLabels: true,
         currentIndex: _selectedIndex, // Set the currently selected index
         onTap: _onItemTapped, // Handle tab selection
         items: const [

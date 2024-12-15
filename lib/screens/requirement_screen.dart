@@ -42,7 +42,7 @@ class RequirementScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding:  EdgeInsets.symmetric(horizontal: 8.0),
+                          padding:  const EdgeInsets.symmetric(horizontal: 8.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -50,14 +50,14 @@ class RequirementScreen extends StatelessWidget {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text("Brand"),
+                                  const Text("Brand",style: TextStyle(color: Colors.grey),),
                                   Text(vehicle.brand.name),
                                 ],
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text("Vehicle Model"),
+                                  const Text("Vehicle Model",style: TextStyle(color: Colors.grey)),
                                   Text(vehicle.vehicleModel.name),
                                 ],
                               )
