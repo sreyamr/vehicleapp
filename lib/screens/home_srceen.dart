@@ -12,9 +12,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _selectedIndex = 0; // Track the selected tab index
+  int _selectedIndex = 0;
 
-  // Function to handle tab selection
+
   void _onItemTapped(int index) {
     if (index == 3) {
       Navigator.pushNamed(context, AppRoutes.requirement);
@@ -27,14 +27,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Fetch the vehicle list when the screen loads
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final totalVehicleProvider =
       Provider.of<TotalVehicleProvider>(context, listen: false);
       totalVehicleProvider.getTotalVechileList();
     });
 
-    // Define the list of screens for tab navigation
     final List<Widget> _screens = [
       // Home Screen
       Consumer<TotalVehicleProvider>(
@@ -65,16 +64,19 @@ class _HomeScreenState extends State<HomeScreen> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    elevation: 4,
+                    elevation: 2,
                     color: Colors.white,
                     child: Center(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          CircleAvatar(
-                            radius: 50, // Adjust the radius as needed
-                            backgroundImage: NetworkImage(
-                              vehicle.images.isNotEmpty ? vehicle.images[0].imageUrl : 'default_image_url',
+                          Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: CircleAvatar(
+                              radius: 50, // Adjust the radius as needed
+                              backgroundImage: NetworkImage(
+                                vehicle.images.isNotEmpty ? vehicle.images[0].imageUrl : 'default_image_url',
+                              ),
                             ),
                           ),
                           const SizedBox(height: 8.0),
@@ -111,22 +113,24 @@ class _HomeScreenState extends State<HomeScreen> {
           );
         },
       ),
-      // Messages Screen (for demonstration)
+
       const Center(child: Text("Messages Screen")),
-      // Profile Screen (for demonstration)
+
       const Center(child: Text("Profile Screen")),
     ];
 
     return Scaffold(
+      backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         leading: const Icon(Icons.menu),
         actions: const [Icon(Icons.notifications_active)],
         title: const Text("Vehicles List"),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Colors.brown, // Color for the selected item icon and label
-        unselectedItemColor: Colors.black, // Color for the unselected item icon and label
-        selectedLabelStyle: const TextStyle(color: Colors.brown), // Selected label text color
+        selectedItemColor: Colors.brown,
+        unselectedItemColor: Colors.grey,
+        selectedLabelStyle: const TextStyle(color: Colors.brown,fontWeight: FontWeight.bold),
         unselectedLabelStyle: const TextStyle(color: Colors.black),
         showUnselectedLabels: true,
         currentIndex: _selectedIndex, // Set the currently selected index
@@ -150,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: _screens[_selectedIndex], // Show the corresponding screen based on selected tab
+      body: _screens[_selectedIndex],
     );
   }
 }

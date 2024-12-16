@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vehicleapp/providers/add_requirement.dart';
 import 'package:vehicleapp/providers/brand_download.dart';
 import 'package:vehicleapp/providers/get_requirement_provider.dart';
 import 'package:vehicleapp/providers/login_provider.dart';
+import 'package:vehicleapp/providers/model_download.dart';
 import 'package:vehicleapp/providers/total_vehicle_provider.dart';
+import 'package:vehicleapp/providers/variant_download.dart';
 import 'package:vehicleapp/providers/vechile_details_provider.dart';
 import 'package:vehicleapp/screens/add_requirement_screen.dart';
 import 'package:vehicleapp/screens/choose_requirement_screen.dart';
@@ -31,7 +34,10 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_)=>TotalVehicleProvider()),
         ChangeNotifierProvider(create: (_)=>GetVehicleDetailsProvider()),
         ChangeNotifierProvider(create: (_)=>GetRequirementProvider()),
-        ChangeNotifierProvider(create: (_)=>BrandDownload())
+        ChangeNotifierProvider(create: (_)=>BrandDownload()),
+        ChangeNotifierProvider(create: (_)=>ModelDownload()),
+        ChangeNotifierProvider(create: (_)=>VariantDownload()),
+        ChangeNotifierProvider(create: (_)=>AddRequirement())
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

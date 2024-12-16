@@ -15,14 +15,16 @@ class RequirementScreen extends StatelessWidget {
      WidgetsBinding.instance.addPostFrameCallback((_) async {
        final getRequirementProvider =
        Provider.of<GetRequirementProvider>(context, listen: false);
-       await getRequirementProvider.getRequirement(); // Wait for data to be fetched
+       await getRequirementProvider.getRequirement();
        vehicle = getRequirementProvider.vehicle.isNotEmpty
-           ? getRequirementProvider.vehicle.first // Assign the first vehicle or handle as needed
+           ? getRequirementProvider.vehicle.first
            : null;
      });
     return Scaffold(
+      backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
-        title: Text("Requirement List"),
+        title: const Text("Requirement List"),
+        backgroundColor: Colors.white
       ),
       body: Consumer<GetRequirementProvider>(
         builder: (context, totalVehicleProvider, child) {
@@ -53,7 +55,14 @@ class RequirementScreen extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                             Text(vehicle.fkVehicleVariantId.toString()),
+                             Text(vehicle.id.toString()),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Text("Fuel",style: TextStyle(color: Colors.grey),),
+                                  Text(vehicle.fuelType.name),
+                                ],
+                              ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
@@ -65,9 +74,9 @@ class RequirementScreen extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   const Text("Vehicle Model",style: TextStyle(color: Colors.grey)),
-                                  Text(vehicle.vehicleModel.name),
+                                  Text(vehicle.vehicleModel.name.toString()),
                                 ],
-                              )
+                              ),
                             ]
                           ),
                         ),
@@ -82,7 +91,7 @@ class RequirementScreen extends StatelessWidget {
       ),
 
       bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(), // Adds a notch for the FAB
+        shape: const CircularNotchedRectangle(),
         child: SizedBox(
           height: 60,
          child: ElevatedButton(onPressed: (){

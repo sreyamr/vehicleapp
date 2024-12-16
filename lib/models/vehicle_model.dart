@@ -26,6 +26,7 @@ class Vehicle {
   final Brand brand;
   final VehicleModelName vehicleModel;
   final VehicleVariant vehicleVariant;
+  final VehicleColor vehicleColor;
 
   Vehicle({
     required this.id,
@@ -55,6 +56,7 @@ class Vehicle {
     required this.brand,
     required this.vehicleModel,
     required this.vehicleVariant,
+    required this.vehicleColor
   });
 
   factory Vehicle.fromJson(Map<String, dynamic> json) {
@@ -80,9 +82,11 @@ class Vehicle {
       listedDays: json['listed_days'] as int?,
       isBooked: json['is_booked'] as bool?,
       bookingId: json['booking_id'] as int?,
+      // Handle null values for images
       images: (json['images'] as List<dynamic>?)
           ?.map((image) => VehicleImage.fromJson(image as Map<String, dynamic>))
-          .toList() ?? [], // Safely handle null images
+          .toList() ??
+          [], // Use an empty list if null
       vehicleType: json['vehicle_type'] != null
           ? VehicleType.fromJson(json['vehicle_type'] as Map<String, dynamic>)
           : VehicleType(id: 0, name: ''), // Default if null
@@ -97,12 +101,28 @@ class Vehicle {
           : VehicleModelName(id: 0, name: ''), // Default if null
       vehicleVariant: json['vehicle_variant'] != null
           ? VehicleVariant.fromJson(json['vehicle_variant'] as Map<String, dynamic>)
-          : VehicleVariant(id: 0, name: ''), // Default if null
+          : VehicleVariant(id: 0, name: ''),
+      vehicleColor: json['vehicleColors'] != null
+          ? VehicleColor.fromJson(json['vehicleColors'] as Map<String, dynamic>)
+          : VehicleColor(id: 0, name: ''), // Default if null
     );
   }
 
 
+
 }
+
+class VehicleColor {
+  final int id;
+  final String name;
+
+  VehicleColor({required this.id, required this.name});
+
+  factory VehicleColor.fromJson(Map<String, dynamic> json) {
+  return VehicleColor(id: json['id'], name: json['name']);
+  }
+}
+
 
 class VehicleImage {
   final int id;
@@ -158,10 +178,10 @@ class Brand {
 }
 
 class VehicleModelName {
-  final int id;
-  final String name;
+  final int? id;
+  final String? name;
 
-  VehicleModelName({required this.id, required this.name});
+  VehicleModelName({ this.id, this.name});
 
   factory VehicleModelName.fromJson(Map<String, dynamic> json) {
     return VehicleModelName(id: json['id'], name: json['name']);
@@ -169,10 +189,10 @@ class VehicleModelName {
 }
 
 class VehicleVariant {
-  final int id;
-  final String name;
+  final int? id;
+  final String? name;
 
-  VehicleVariant({required this.id, required this.name});
+  VehicleVariant({ this.id, this.name});
 
   factory VehicleVariant.fromJson(Map<String, dynamic> json) {
     return VehicleVariant(id: json['id'], name: json['name']);

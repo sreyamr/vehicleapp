@@ -84,6 +84,9 @@ class LoginScreen extends StatelessWidget {
           decoration: InputDecoration(
             labelText: label,
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+            prefixIcon: isPassword
+                ? Icon(Icons.lock, color: Colors.grey)  // Lock icon for password
+                : Icon(Icons.email, color: Colors.grey), // Email icon for email field
             suffixIcon: isPassword
                 ? IconButton(
               icon: Icon(
@@ -104,6 +107,7 @@ class LoginScreen extends StatelessWidget {
   }
 
 
+
   Widget buildLoginButton(BuildContext context) {
     return Consumer<LoginProvider>(
       builder: (context, loginProvider, child) {
@@ -115,7 +119,7 @@ class LoginScreen extends StatelessWidget {
               await loginProvider.loginUser(userModel);
 
               if (loginProvider.loginSuccess) {
-                Navigator.pushNamed(context, AppRoutes.home);
+                Navigator.pushNamedAndRemoveUntil(context, AppRoutes.home,(Route<dynamic> route) => false,);
               }
             },
             style: ElevatedButton.styleFrom(
