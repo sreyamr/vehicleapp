@@ -6,10 +6,10 @@ import '../config/app_controller.dart';
 import '../utlis/urls.dart';
 
 class AddRequirement with ChangeNotifier {
-  bool _loginSuccess = false;
+  bool _addSuccess = false;
   String? _errorMessage;
 
-  bool get loginSuccess => _loginSuccess;
+  bool get addSuccess => _addSuccess;
   String? get errorMessage => _errorMessage;
 
   Future<void> addRequirement(VehicleRequirement vehicleRequirement) async {
@@ -37,16 +37,16 @@ class AddRequirement with ChangeNotifier {
         final data = json.decode(response.body);
         print("Response data: $data");
 
-        _loginSuccess = true;
+        _addSuccess = true;
       } else {
         print('Request failed: ${response.body}');
-        _loginSuccess = false;
+        _addSuccess = false;
       }
 
       notifyListeners();
     } catch (e) {
       print('An error occurred: $e');
-      _loginSuccess = false;
+      _addSuccess = false;
       _errorMessage = e.toString();
       notifyListeners();
     }

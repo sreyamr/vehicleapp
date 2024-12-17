@@ -350,7 +350,7 @@ class _AddRequirementScreenState extends State<AddRequirementScreen> {
 
     final addRequirementProvider = Provider.of<AddRequirement>(context, listen: false);
     addRequirementProvider.addRequirement(requirement).then((_) {
-      if (addRequirementProvider.loginSuccess) {
+      if (addRequirementProvider.addSuccess) {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Vehicle requirement created')));
       } else {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Failed to add requirement')));
